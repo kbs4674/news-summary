@@ -1,0 +1,39 @@
+<script type='text/javascript'>
+  // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+  Kakao.init("<%= ENV["KAKAO_JAVASCRIPT_API"] %>");
+  // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+  Kakao.Link.createDefaultButton({
+    container: "#kakao-link-btn_<%= x.id %>",
+    objectType: 'feed',
+    content: {
+      title: "<%= x.title %>",
+      description: "<%= x.content.truncate(20, omission: '...') %>",
+      imageUrl: "<%= x.thumb_nail %>",
+      link: {
+        mobileWebUrl: 'https://developers.kakao.com',
+        webUrl: 'https://developers.kakao.com'
+      }
+    },
+    social: {
+      likeCount: 286,
+      commentCount: 45,
+      sharedCount: 845
+    },
+    buttons: [
+      {
+        title: '웹으로 보기',
+        link: {
+          mobileWebUrl: "<%= x.news_url %>",
+          webUrl: "<%= x.news_url %>"
+        }
+      },
+      {
+        title: '앱으로 보기',
+        link: {
+          mobileWebUrl: "<%= x.news_url %>",
+          webUrl: "<%= x.news_url %>"
+        }
+      }
+    ]
+  });
+</script>

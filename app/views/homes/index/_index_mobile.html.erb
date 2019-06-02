@@ -1,0 +1,71 @@
+<%# 모바일 %>
+<div class="col-12" style="margin-top: 40px; margin-left: 3px;">
+  <div class="row accordion" id="realtime_hotissue_<%= x.id %>">
+    <%= link_to "javascript:void(0)", class: "row col-12 tuple_space", style: "text-decoration: none; justify-content: center;", :data => { :'toggle' => "collapse", :'target' => "#collapse#{x.id}",  :'expanded' => 'false',  :'controls' => "collapse#{x.id}" } do %>
+      <div style="position: relative;">
+        <img src="<%= x.thumb_nail %>" style="width: 300px; height: 170px;">
+        <div style="position: absolute; top: 140px; padding-left: 10px; width: 100%; color: white; background-color: rgba(0, 0, 0, 0.65); padding-top: 5px; padding-bottom: 4px;"><%= x.title.truncate(20, omission: '...') %></div>
+      </div>
+    <% end %>
+    
+    <div id="collapse<%= x.id %>" class="collapse col-12" aria-labelledby="headingOne" data-parent="#realtime_hotissue_<%= x.id %>">
+      <div class="col-12" style="margin-top: 20px;">
+        <h3><%= x.title %></h3>
+        <div><%= x.content.truncate(250, omission: '...').html_safe %></div>
+        
+        <div align="right">
+          <div style="margin-top: 30px"><i class="far fa-clock"></i> <%= x.created_at.in_time_zone("Asia/Seoul").strftime('%Y-%m-%d') %></div>
+          <div class="row" style="float: right; margin-right: 0px;">
+            <div>
+              <a id="kakao-link-btn_<%= x.id %>" href="javascript:;">
+                <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" style="width: 20px"/>
+              </a>
+            </div>
+              <div style="margin-left: 10px"><%= link_to "[자세히 보기]", "#{x.news_url}", target: "_blank" %></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type='text/javascript'>
+  // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+  Kakao.init("<%= ENV["KAKAO_JAVASCRIPT_API"] %>");
+  // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+  Kakao.Link.createDefaultButton({
+    container: "#kakao-link-btn_<%= x.id %>",
+    objectType: 'feed',
+    content: {
+      title: "<%= x.title %>",
+      description: "<%= x.content.truncate(20, omission: '...') %>",
+      imageUrl: "<%= x.thumb_nail %>",
+      link: {
+        mobileWebUrl: 'https://developers.kakao.com',
+        webUrl: 'https://developers.kakao.com'
+      }
+    },
+    social: {
+      likeCount: 286,
+      commentCount: 45,
+      sharedCount: 845
+    },
+    buttons: [
+      {
+        title: '웹으로 보기',
+        link: {
+          mobileWebUrl: "<%= x.news_url %>",
+          webUrl: "<%= x.news_url %>"
+        }
+      },
+      {
+        title: '앱으로 보기',
+        link: {
+          mobileWebUrl: "<%= x.news_url %>",
+          webUrl: "<%= x.news_url %>"
+        }
+      }
+    ]
+  });
+</script>

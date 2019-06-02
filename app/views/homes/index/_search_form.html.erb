@@ -1,0 +1,22 @@
+<%# PC %>
+<div class="d-none d-md-block">
+    <div class="offset-md-2">
+        <%= form_tag(homes_news_search_path , method: "get", class: "row") do %> <%# method를 get방식으로 받아내며, parameter가 /searches/result로 넘어갈 예정. %>
+            <div class="col-md-3"><%= select_tag(:option, options_for_select([['요약뉴스', 1], ['Fake News', 2]], :selected => params[:option]), style: "border-top: 2px solid #ffbb40; border-bottom: 2px solid #ffbb40; border-left: 2px solid #ffbb40; border-right: 2px solid #ffbb40; border-radius: 30px; padding: 10px; width: 100%") %></div>
+            <div class="col-md-7"><%= text_field_tag :search_text, "", style: "background-color: rgba(96, 125, 139, 0); border-top: 2px solid #ffbb40; border-bottom: 2px solid #ffbb40; border-left: 2px solid #ffbb40; border-right: 2px solid #ffbb40; border-radius: 30px; padding: 10px; width: 100%; box-shadow: 5px 6px 1px rgba(0, 0, 0, 0.38);", placeholder: "뉴스 검색" %></div> <%# 검색 하고자 하는 단어를 입력받음, 이 떄 name은 [검색 단어] %>
+            <div class="col-md-2" style="margin-top: 10px; margin-left: -70px;"><%= submit_tag("&#xf002".html_safe, class: "fas fa-search", style: "background-color: rgba(96, 125, 139, 0); border-top: 0px; border-bottom: 0px; border-left: 0px; border-right: 0px; cursor: pointer") %></div>
+        <% end %>
+    </div>
+</div>
+
+
+<%# 모바일 %>
+<div class="d-md-none">
+    <div class="offset-1">
+        <%= form_tag(homes_news_search_path , method: "get", class: "row") do %> <%# method를 get방식으로 받아내며, parameter가 /searches/result로 넘어갈 예정. %>
+            <div class="col-4"><%= select_tag(:option, options_for_select([['요약뉴스', 1], ['Fake News', 2]], :selected => params[:option]), style: "border-top: 2px solid #ffbb40; border-bottom: 2px solid #ffbb40; border-left: 2px solid #ffbb40; border-right: 2px solid #ffbb40; border-radius: 30px; padding: 10px; width: 100%") %></div>
+            <div class="col-6"><%= text_field_tag :search_text, "", style: "background-color: rgba(96, 125, 139, 0); border-top: 2px solid #ffbb40; border-bottom: 2px solid #ffbb40; border-left: 2px solid #ffbb40; border-right: 2px solid #ffbb40; border-radius: 30px; padding: 10px; width: 100%; box-shadow: 5px 6px 1px rgba(0, 0, 0, 0.38);", placeholder: "뉴스 검색" %></div> <%# 검색 하고자 하는 단어를 입력받음, 이 떄 name은 [검색 단어] %>
+            <div class="col-1" style="margin-top: 10px; margin-left: -70px;"><%= submit_tag("&#xf002".html_safe, class: "fas fa-search", style: "background-color: rgba(96, 125, 139, 0); border-top: 0px; border-bottom: 0px; border-left: 0px; border-right: 0px; cursor: pointer") %></div>
+        <% end %>
+    </div>
+</div>

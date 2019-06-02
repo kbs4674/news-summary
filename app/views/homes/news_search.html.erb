@@ -1,0 +1,26 @@
+<%= render 'homes/index/top_banner' %>
+
+<div class="container" style="margin-top: 50px; margin-bottom: 50px;">
+  <%= render 'homes/index/search_result_form' %>
+  
+  <div align="center" style="margin-top: 50px; font-size: 50px;">
+    <span id="typed" style="font-weight: bold;"></span> 검색 결과
+  </div>
+  
+  <div class="row" style="margin-top: 50px">
+    <% if @option == "1" %>
+      <% @news_result.each do |x| %>
+        <%= render 'homes/index/index', x: x %>
+      <% end %>
+    <% elsif @option == "2" %>
+      <% @news_result.each do |x| %>
+        <%= render 'homes/index/fake_index', x: x %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<!-- Typed.js List -->
+<div id="search_params">
+    <p><%= params[:search_text] %></p>
+</div>
